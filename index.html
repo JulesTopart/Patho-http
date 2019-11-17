@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="PathoTeam">
+    <title>Patho Search</title>
+
+    <link rel="stylesheet" type="text/css" href="./styles.css" media="screen" />
+    <script type="text/javascript" src="index.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Nav Structure : This is used to select the module you want to use -->
+    <nav>
+        <div class="nav-fixed red">
+
+            <ul id="slide-out" class="sidenav">
+                <li>
+                    <div class="user-view">
+                        <div class="background">
+                            <img src="images/fond.jpeg">
+                        </div>
+                        <a href="#user"><img class="circle" src="images/profile.jpg"></a>
+                        <a href="#name"><span class="white-text name">Pierre Delocroix</span></a>
+                        <a href="#email"><span class="white-text email">pierre.delocroix@gmail.com</span></a>
+                    </div>
+                </li>
+                <li id="phoneTrigger" class="show">
+                    <a href="#">
+                        <span class="translatable_save">Phone App</span>
+                        <i class="medium material-icons left" style="line-height: 2">phonelink_ring</i>
+                    </a>
+                </li>
+                <li id="searchBarTrigger" class="hide">
+                    <a href="#">
+                        <span class="translatable_save">Moteur de recherche</span>
+                        <i class="medium material-icons left" style="line-height: 2">search</i>
+                    </a>
+                </li>
+                <li>
+                    <a class="waves-effect waves-light modal-trigger" href="#modal1"><i
+                            class="material-icons">group_add</i>Create account</a>
+                </li>
+            </ul>
+
+
+            <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large"><i class="material-icons">menu</i></a>
+
+        </div>
+    </nav>
+
+
+
+    <!-- MAIN STRUCTURE -->
+    <div id="searchBar" class="center-align show">
+        <img href="index.html" src="images/logoPathoSearch.png" height="42%" width="42%">
+
+
+        <div class="row">
+            <form class="col s6 offset-s3">
+
+                <input type="text" name="search" placeholder="Search..">
+
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Modal Structure : This is used to create User account -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h4>Créer un compte</h4>
+            <div class="row">
+                <form class="col s12">
+                    <div class="row">
+
+                        <div class="input-field col s2 offset-s1 ">
+                            <div class="circleProfile">
+                                <!-- User Profile Image -->
+                                <img class="profile-pic" src="images/cameraAddUser.png">
+
+                            </div>
+
+                            <div class="p-image">
+                                <i class="small material-icons upload-button">add_a_photo</i>
+                                <input class="file-upload" type="file" accept="image/*" />
+                            </div>
+
+                        </div>
+
+                        <div class="input-field col s3 offset-s8">
+                            <i class="medium material-icons">account_circle</i>
+                        </div>
+
+                        <div class="input-field col s6 offset-s6">
+                            <input id="icon_prefix_firstName" type="text" class="validate">
+                            <label for="icon_prefix">Prénom</label>
+                        </div>
+
+                        <div class="input-field col s6 offset-s6">
+                            <input id="icon_prefix_lastName" type="text" class="validate">
+                            <label for="icon_prefix">Nom</label>
+                        </div>
+
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix">mail_outline</i>
+                                    <input id="email" type="email" class="validate">
+                                    <label for="email">E-mail</label>
+                                    <span class="helper-text" data-error="wrong" data-success="right"></span>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="input-field col s12">
+                            <input id="pwd" type="text" class="validate">
+                            <label for="pwd">Mot de passe</label>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <input id="pwdCheck" type="text" class="validate">
+                            <label for="pwdCheck">Entrer à nouveau votre mot de pass</label>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="modal-close waves-effect waves-green btn-flat">Valider</a>
+        </div>
+    </div>
+
+    <section class="container hide" id="demo-content">
+        <div class="buttonChoice">
+            <a class="waves-effect waves-light btn  red" id="startButton">Scan</a>
+            <a class="waves-effect waves-light btn  red" id="resetButton">Reset</a>
+        </div>
+
+        <!--Video div display-->
+        <div>
+            <video id="video" width="500" height="400" style="border: 1px solid gray; margin-left: auto; margin-right: auto;"></video>
+        </div>
+
+        <!-- if you use a phone you can select the camera you want-->
+        <div id="sourceSelectPanel" style="display:none">
+            <label for="sourceSelect">Changer de caméra:</label>
+            <select id="sourceSelect" style="max-width:400px">
+            </select>
+        </div>
+
+
+    </section>
+
+
+
+</body>
+
+</html>
