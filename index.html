@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="utf-8">
@@ -16,62 +16,69 @@
 </head>
 
 <body>
-    <!-- Nav Structure : This is used to select the module you want to use -->
-    <nav>
-        <div class="nav-fixed green">
 
-            <ul id="slide-out" class="sidenav">
+    <!-- Toolbar -->
+    <nav>
+        <div class="nav-fixed">
+            <a href="#" data-target="slide-out" class="sidenav-trigger left show-on-large"><i
+                    class="material-icons">menu</i></a>
+            <ul class="hide-on-med-and-down">
                 <li>
-                    <div class="user-view">
-                        <div class="background">
-                            <img src="images/fond.jpeg">
+                    <div class="center row">
+                        <div class="col s12 ">
+                            <div class="row" id="topbarsearch">
+                                <div class="input-field col s6 s12">
+                                    <i class="material-icons prefix">search</i>
+                                    <input type="text" placeholder="Rechercher...">
+                                </div>
+                            </div>
                         </div>
-                        <a href="#user"><img class="circle" src="images/profile.jpg"></a>
-                        <a href="#name"><span class="white-text name">Pierre Delocroix</span></a>
-                        <a href="#email"><span class="white-text email">pierre.delocroix@gmail.com</span></a>
                     </div>
                 </li>
-                <li id="phoneTrigger" class="show">
-                    <a href="#">
-                        <span class="translatable_save">Phone App</span>
-                        <i class="medium material-icons left" style="line-height: 2">phonelink_ring</i>
-                    </a>
-                </li>
-                <li id="searchBarTrigger" class="hide">
-                    <a href="#">
-                        <span class="translatable_save">Moteur de recherche</span>
-                        <i class="medium material-icons left" style="line-height: 2">search</i>
-                    </a>
-                </li>
-                <li>
-                    <a class="waves-effect waves-light modal-trigger" href="#modal1"><i
-                            class="material-icons">group_add</i>Create account</a>
-                </li>
             </ul>
-
-
-            <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large"><i
-                    class="material-icons">menu</i></a>
 
         </div>
     </nav>
 
-
-
-    <!-- MAIN STRUCTURE -->
-    <div id="searchBar" class="center-align show">
-        <img href="index.html" src="images/logoPathoSearch.png" height="42%" width="42%">
-
-
-        <div class="row">
-            <form class="col s6 offset-s3">
-
-                <input type="text" name="search" placeholder="Search..">
-
-            </form>
+    <!-- Big Search bar -->
+    <div id="search-bar" class="center-align show">
+        <form>
+            <img id="patho-logo" src="images/logoPathoSearch.png">
+            <input type="text" name="search" placeholder="Rechercher...">
+        </form>
+        <div class="chip-container">
+            <div class="chip">
+                Tag
+                <i class="close material-icons">close</i>
+            </div>
         </div>
     </div>
 
+    <!-- Sidenav -->
+    <ul id="slide-out" class="sidenav">
+        <li>
+            <div class="user-view">
+                <div class="background">
+                    <img src="images/fond.jpeg">
+                </div>
+                <a href="#user"><img class="circle" src="images/default-avatar.jpg"></a>
+                <a href="#name"><span class="white-text name">Pierre Delocroix</span></a>
+                <a href="#email"><span class="white-text email">pierre.delocroix@gmail.com</span></a>
+            </div>
+        </li>
+        <li id="phoneTrigger" class="show">
+            <a class="waves-effect waves-light modal-trigger" href="#"><i
+                    class="material-icons">phonelink_ring</i>Application smartphone</a>
+        </li>
+        <li id="searchBarTrigger" class="hide">
+            <a class="waves-effect waves-light modal-trigger" href="#"><i class="material-icons">search</i>Moteur de
+                recherche</a>
+        </li>
+        <li>
+            <a class="waves-effect waves-light modal-trigger" href="#modal1"><i
+                    class="material-icons">group_add</i>Créer un compte</a>
+        </li>
+    </ul>
 
     <!-- Modal Structure : This is used to create User account -->
     <div id="modal1" class="modal">
@@ -80,7 +87,6 @@
             <div class="row">
                 <form class="col s12">
                     <div class="row">
-
                         <div class="input-field col s2 offset-s1 ">
                             <div class="circleProfile">
                                 <!-- User Profile Image -->
@@ -147,7 +153,8 @@
 
         <!--Video div display-->
         <div>
-            <video id="video" width="500" height="400" style="border: 1px solid gray; margin-left: auto; margin-right: auto;"></video>
+            <video id="video" width="500" height="400"
+                style="border: 1px solid gray; margin-left: auto; margin-right: auto;"></video>
         </div>
 
         <!-- if you use a phone you can select the camera you want-->
