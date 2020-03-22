@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="PathoTeam">
     <title>Patho Search</title>
+    <link rel="icon" href="../src/assets/icons/favicon.ico" />
 
     <link rel="stylesheet" type="text/css" href="./styles.css" media="screen" />
     <script type="text/javascript" src="index.js"></script>
@@ -13,30 +14,42 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+
 </head>
 
 <body>
-
     <!-- Toolbar -->
     <nav>
         <div class="nav-fixed">
-            <a href="#" data-target="slide-out" class="sidenav-trigger left show-on-large"><i
+            <a href="#" data-target="slide-out" class="sidenav-trigger left show-on-large "><i
                     class="material-icons">menu</i></a>
-            <ul class="hide-on-med-and-down">
-                <li>
+
+            <ul class="show-on-med-and-down">
+                <li class="hide-on-med-and-down">
                     <div class="center row">
                         <div class="col s12 ">
-                            <div class="row" id="topbarsearch">
-                                <div class="input-field col s6 s12">
-                                    <i class="material-icons prefix">search</i>
-                                    <input type="text" placeholder="Rechercher...">
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </li>
-            </ul>
 
+                <!-- TODO faire varier le nombre de rappel en fonction des emprunts
+
+                 -->
+                <ul class="right">
+                    <!-- TODO faire une fonction qui permet de faire le compte des rappels -->
+                    <!-- TODO faire une fonction qui permet de faire l'affichage des rappels-->
+                    <li>
+                        <a id="warningBadge" class="pulse waves-effect waves-light btn modal-trigger"
+                            href="#alertManager"><i class="material-icons right">add_alert</i>3</a>
+                    </li>
+                </ul>
+
+                <div class="button-connect-div">
+                    <a class="waves-effect waves-light btn modal-trigger button-connect"
+                        href="#connexion">Connectez-vous</a>
+                </div>
+            </ul>
         </div>
     </nav>
 
@@ -44,14 +57,23 @@
     <div id="search-bar" class="center-align show">
         <form>
             <img id="patho-logo" src="images/logoPathoSearch.png">
-            <input type="text" name="search" placeholder="Rechercher...">
-        </form>
-        <div class="chip-container">
-            <div class="chip">
-                Tag
-                <i class="close material-icons">close</i>
+
+            <div class="row">
+                <div class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <div class="chips chips-autocomplete"></div>
+
+                            <button id="buttonSearchTag" class="btn red waves-effect waves-light" type="submit"
+                                name="action">Rechercher
+                                <i class="material-icons right">search</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+
+        </form>
     </div>
 
     <!-- Sidenav -->
@@ -66,12 +88,13 @@
                 <a href="#email"><span class="white-text email">pierre.delocroix@gmail.com</span></a>
             </div>
         </li>
-        <li id="phoneTrigger" class="show">
-            <a class="waves-effect waves-light modal-trigger" href="#"><i
+        <li id="phoneTrigger">
+            <a id="appSelect" class="waves-effect waves-light modal-trigger" href="#"><i
                     class="material-icons">phonelink_ring</i>Application smartphone</a>
         </li>
-        <li id="searchBarTrigger" class="hide">
-            <a class="waves-effect waves-light modal-trigger" href="#"><i class="material-icons">search</i>Moteur de
+        <li id="searchBarTrigger">
+            <a id="searchBarSelect" class="waves-effect waves-light modal-trigger" href="#"><i
+                    class="material-icons">search</i>Moteur de
                 recherche</a>
         </li>
         <li>
@@ -81,97 +104,169 @@
     </ul>
 
     <!-- Modal Structure : This is used to create User account -->
-    <div id="modal1" class="modal">
+    <div id="modal1" class="modal modal-fixed-footer">
         <div class="modal-content">
-            <h4>Créer un compte</h4>
+
             <div class="row">
                 <form class="col s12">
                     <div class="row">
-                        <div class="input-field col s2 offset-s1 ">
-                            <div class="circleProfile">
-                                <!-- User Profile Image -->
-                                <img class="profile-pic" src="images/cameraAddUser.png">
-
-                            </div>
-
-                            <div class="p-image">
-                                <i class="small material-icons upload-button">add_a_photo</i>
-                                <input class="file-upload" type="file" accept="image/*" />
-                            </div>
-
-                        </div>
-
-                        <div class="input-field col s3 offset-s8">
-                            <i class="medium material-icons">account_circle</i>
-                        </div>
-
-                        <div class="input-field col s6 offset-s6">
-                            <input id="icon_prefix_firstName" type="text" class="validate">
-                            <label for="icon_prefix">Prénom</label>
-                        </div>
-
-                        <div class="input-field col s6 offset-s6">
-                            <input id="icon_prefix_lastName" type="text" class="validate">
-                            <label for="icon_prefix">Nom</label>
-                        </div>
-
-                        <form class="col s12">
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <i class="material-icons prefix">mail_outline</i>
-                                    <input id="email" type="email" class="validate">
-                                    <label for="email">E-mail</label>
-                                    <span class="helper-text" data-error="wrong" data-success="right"></span>
+                        <div id="firstStepCreateAccount">
+                            <div class="input-field col s2 offset-s1 ">
+                                <div class="circleProfile">
+                                    <!-- User Profile Image -->
+                                    <img class="profile-pic" src="images/cameraAddUser.png">
                                 </div>
+
+                                <div class="p-image">
+                                    <i class="small material-icons upload-button">add_a_photo</i>
+                                    <input class="file-upload" type="file" accept="image/*" />
+                                </div>
+
                             </div>
-                        </form>
 
-                        <div class="input-field col s12">
-                            <input id="pwd" type="text" class="validate">
-                            <label for="pwd">Mot de passe</label>
+                            <div class="input-field col s3 offset-s8">
+                                <i class="medium material-icons">account_circle</i>
+                            </div>
+
+                            <div class="input-field col s6 offset-s6">
+                                <input id="icon_prefix_firstName" type="text" class="validate">
+                                <label for="icon_prefix">Prénom</label>
+                                <span class="helper-text" data-error="incorrect" data-success="correct"></span>
+                            </div>
+
+                            <div class="input-field col s6 offset-s6">
+                                <input id="icon_prefix_lastName" type="text" class="validate">
+                                <label for="icon_prefix">Nom</label>
+                                <span class="helper-text" data-error="incorrect" data-success="correct"></span>
+                            </div>
+
+                            <form class="col s12">
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <i class="material-icons prefix">mail_outline</i>
+                                        <input id="email" type="email" class="validate">
+                                        <label for="email">E-mail</label>
+                                        <span class="helper-text" data-error="incorrect" data-success="correct"></span>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
 
-                        <div class="input-field col s12">
-                            <input id="pwdCheck" type="text" class="validate">
-                            <label for="pwdCheck">Entrer à nouveau votre mot de pass</label>
-                        </div>
 
+                        <div id="secondStepCreateAccount" class="hide">
+
+                            <!-- TODO faire un password strengh meter -->
+                            <div class="input-field col s6 offset-s3">
+                                <input id="pwd" type="password" required minlength="6" class="validate">
+                                <label for="pwd">Mot de passe</label>
+                            </div>
+
+                            <div class="input-field col s6 offset-s3">
+                                <input id="pwdCheck" type="password" required minlength="6" class="validate">
+                                <label for="pwdCheck">Entrer à nouveau votre mot de passe</label>
+                            </div>
+
+                            <div class="input-field col s6 offset-s3">
+                                <label>
+                                    <input id="show_pwd_createAccount" type="checkbox" />
+                                    <span>voir le mot de passe</span>
+                                </label>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
         <div class="modal-footer">
-            <a href="#" class="modal-close waves-effect waves-green btn-flat">Valider</a>
+            <a id="createAccountValidation" href="#" class="waves-effect waves-red btn-flat">Suivant</a>
         </div>
     </div>
 
-    <section class="container hide" id="demo-content">
-        <div class="buttonChoice">
-            <a class="waves-effect waves-light btn  red" id="startButton">Scan</a>
-            <a class="waves-effect waves-light btn  red" id="resetButton">Reset</a>
+
+    <!-- Modal Structure : This is used to connect to the DB -->
+    <div id="connexion" class="modal">
+        <div class="modal-content">
+
+            <div class="row">
+                <form class="col s12">
+                    <div class="row">
+                        <div class="input-field col s6 offset-s4">
+                            <h4>Connexion</h4>
+                        </div>
+
+                        <div id="firstStepConnexion">
+                            <div class="input-field col s6 offset-s3">
+                                <input id="connexion_firstName" type="text" class="validate">
+                                <label for="icon_prefix">Prénom</label>
+                                <span class="helper-text" data-error="incorrect" data-success="correct"></span>
+                            </div>
+
+                            <div class="input-field col s6 offset-s3">
+                                <input id="connexion_lastName" type="text" class="validate">
+                                <label for="icon_prefix">Nom</label>
+                                <span class="helper-text" data-error="incorrect" data-success="correct"></span>
+                            </div>
+                        </div>
+
+                        <div id="secondStepConnexion" class="hide">
+                            <div class="input-field col s6 offset-s3">
+                                <input id="mdpConnexion" type="password" required minlength="6" class="validate">
+                                <label for="icon_prefix">Mot de passe</label>
+                            </div>
+
+                            <!-- TODO voir pouquoi l'affichage du mot de passe ne foncitonne pas -> voir dans le fichier design.js -->
+                            <div class="input-field col s6 offset-s3">
+                                <label>
+                                    <input id="show_pwd" type="checkbox" />
+                                    <span>voir le mot de passe</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-
-        <!--Video div display-->
-        <div>
-            <video id="video" width="500" height="400"
-                style="border: 1px solid gray; margin-left: auto; margin-right: auto;"></video>
+        <div class="modal-footer">
+            <a id="connexion-validation" href="#" class="waves-effect waves-red btn-flat">Suivant</a>
         </div>
+    </div>
 
-        <!-- if you use a phone you can select the camera you want-->
-        <div id="sourceSelectPanel" style="display:none">
-            <label for="sourceSelect">Changer de caméra:</label>
-            <select id="sourceSelect" style="max-width:400px">
-            </select>
+
+    <!-- Modal Structure : This is used to manage alerts-->
+    <div id="alertManager" class="modal">
+        <div class="modal-content">
+            <div class="row">
+                <div class="input-field col s6 offset-s3">
+                    <h6>Rappels des échantillons à rendre</h6>
+                </div>
+                <form class="col s12">
+                    <ul class="collapsible popout">
+                        <li class="active">
+                            <div class="collapsible-header"><i class="material-icons">chevron_right</i>Echantillon
+                                n°1</div>
+                            <div class="collapsible-body"><span>coucou jules</span></div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">chevron_right</i>Echantillon
+                                n°2</div>
+                            <div class="collapsible-body"><span>coucou thomas</span></div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">chevron_right</i>Echantillon
+                                n°3</div>
+                            <div class="collapsible-body"><span>coucou frank</span></div>
+                        </li>
+                    </ul>
+
+                </form>
+
+                </form>
+            </div>
         </div>
-
-        <ul class="collaspible popout" id="resultHandler">
-
-        </ul>
+    </div>
 
 
-    </section>
-
-
+    <div id="demo-content"></div>
 
 </body>
 
