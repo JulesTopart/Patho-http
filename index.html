@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="PathoTeam">
     <title>Patho Search</title>
-    <link rel="icon" href="../src/assets/icons/favicon.ico" />
+    <link rel="icon" href="icons/favicon.ico" />
 
     <link rel="stylesheet" type="text/css" href="./styles.css" media="screen" />
     <script type="text/javascript" src="index.js"></script>
@@ -33,21 +33,9 @@
                     </div>
                 </li>
 
-                <!-- TODO faire varier le nombre de rappel en fonction des emprunts
-
-                 -->
-                <ul class="right">
-                    <!-- TODO faire une fonction qui permet de faire le compte des rappels -->
-                    <!-- TODO faire une fonction qui permet de faire l'affichage des rappels-->
-                    <li>
-                        <a id="warningBadge" class="pulse waves-effect waves-light btn modal-trigger"
-                            href="#alertManager"><i class="material-icons right">add_alert</i>3</a>
-                    </li>
-                </ul>
 
                 <div class="button-connect-div">
-                    <a class="waves-effect waves-light btn modal-trigger button-connect"
-                        href="#connexion">Connectez-vous</a>
+                    <a class="waves-effect waves-light btn modal-trigger button-connect" href="#connexion">Connexion</a>
                 </div>
             </ul>
         </div>
@@ -62,12 +50,20 @@
                 <div class="col s12">
                     <div class="row">
                         <div class="input-field col s12">
-                            <div class="chips chips-autocomplete"></div>
+                            <!-- <div class="chips chips-autocomplete"></div> -->
 
-                            <button id="buttonSearchTag" class="btn red waves-effect waves-light" type="submit"
-                                name="action">Rechercher
-                                <i class="material-icons right">search</i>
-                            </button>
+                            <form autocomplete="off" action="/action_page.php">
+                                <div class="autocomplete">
+                                    <input id="searchBar" type="text" name="myCountry" placeholder="Rechercher...">
+                                </div>
+
+                                <button id="buttonSearchTag" class="btn red waves-effect waves-light" type="submit"
+                                    name="action">Rechercher
+                                    <i class="material-icons right">search</i>
+                                </button>
+                            </form>
+
+
                         </div>
                     </div>
                 </div>
@@ -190,7 +186,7 @@
             <div class="row">
                 <form class="col s12">
                     <div class="row">
-                        <div class="input-field col s6 offset-s4">
+                        <div class="input-field col s12 center">
                             <h4>Connexion</h4>
                         </div>
 
@@ -236,25 +232,47 @@
     <div id="alertManager" class="modal">
         <div class="modal-content">
             <div class="row">
-                <div class="input-field col s6 offset-s3">
+                <div class="input-field col s12 center">
                     <h6>Rappels des échantillons à rendre</h6>
                 </div>
                 <form class="col s12">
                     <ul class="collapsible popout">
                         <li class="active">
-                            <div class="collapsible-header"><i class="material-icons">chevron_right</i>Echantillon
-                                n°1</div>
+                            <div class="collapsible-header">
+                                <i class="material-icons">chevron_right</i>Echantillon n°1
+
+                                <button style="border-radius: 20px;" class="btn red waves-effect waves-light">
+                                    <i class="material-icons right">home</i>
+                                </button>
+
+
+                                <button style="border-radius: 20px; margin-left: 10px !important;"
+                                    class="btn red waves-effect waves-light">
+                                    <i class="material-icons right">history</i>
+                                </button>
+
+
+                                <!-- <span class="new badge red" data-badge-caption="Prolonger"></span>
+                                <span class="new badge red" data-badge-caption="Rendre"></span> -->
+                            </div>
                             <div class="collapsible-body"><span>coucou jules</span></div>
                         </li>
                         <li>
                             <div class="collapsible-header"><i class="material-icons">chevron_right</i>Echantillon
-                                n°2</div>
+                                n°2
+
+                                <button style="border-radius: 20px;" class="btn red waves-effect waves-light">
+                                    <i class="material-icons right">home</i>
+                                </button>
+
+
+                                <button style="border-radius: 20px; margin-left: 10px !important;"
+                                    class="btn red waves-effect waves-light">
+                                    <i class="material-icons right">history</i>
+                                </button>
+
+                            </div>
                             <div class="collapsible-body"><span>coucou thomas</span></div>
-                        </li>
-                        <li>
-                            <div class="collapsible-header"><i class="material-icons">chevron_right</i>Echantillon
-                                n°3</div>
-                            <div class="collapsible-body"><span>coucou frank</span></div>
                         </li>
                     </ul>
 
