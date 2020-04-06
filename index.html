@@ -14,7 +14,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
 
 </head>
 
@@ -34,17 +33,18 @@
                 </li>
 
                 <div class="button-div">
-                    <div id="phoneButton" style="float:left;" class="hide">
-                        <a id="appSelect" class="waves-effect waves-light btn modal-trigger button-connect" href="#"><i
-                                class="medium material-icons">speaker_phone</i></a>
+                    <div id="phoneButton" style="float: right;" class="hide">
+                        <a id="appSelectButton" class="waves-effect waves-light btn modal-trigger button-icons-barTop"
+                            href="#"><i class="small material-icons left">speaker_phone</i>Scan</a>
                     </div>
 
-                    <div id="searchButton" style="float:left;" class="hide">
-                        <a id="searchSelect" class="waves-effect waves-light btn modal-trigger button-connect"
-                            href="#"><i class="medium material-icons">search</i></a>
+                    <div id="searchButton" style="float: right;" class="hide">
+                        <a id="searchSelect" class="waves-effect waves-light btn modal-trigger button-icons-barTop"
+                            href="#"><i class="small material-icons left">search</i>Search</a>
                     </div>
 
-                    <a class="waves-effect waves-light btn modal-trigger button-connect" href="#connexion">Connexion</a>
+                    <a id="buttonConnectionTop" class="waves-effect waves-light btn modal-trigger button-connect"
+                        href="#connexion">Connexion</a>
                 </div>
             </ul>
         </div>
@@ -192,7 +192,6 @@
     <!-- Modal Structure : This is used to connect to the DB -->
     <div id="connexion" class="modal">
         <div class="modal-content">
-
             <div class="row">
                 <form class="col s12">
                     <div class="row">
@@ -215,7 +214,8 @@
 
 
                             <div class="input-field col s6 offset-s3 center">
-                                <u><a style="color: black;" href="#">Faire une demande de création de compte</a></u>
+                                <u><a style="color: black;" href="#modal1">Faire une demande de création de
+                                        compte</a></u>
                             </div>
                         </div>
 
@@ -241,63 +241,6 @@
             <a id="connexion-validation" href="#" class="waves-effect waves-red btn-flat">Suivant</a>
         </div>
     </div>
-
-
-    <!-- Modal Structure : This is used to manage alerts-->
-    <div id="alertManager" class="modal">
-        <div class="modal-content">
-            <div class="row">
-                <div class="input-field col s12 center">
-                    <h6>Rappels des échantillons à rendre</h6>
-                </div>
-                <form class="col s12">
-                    <ul class="collapsible popout">
-                        <li class="active">
-                            <div class="collapsible-header">
-                                <i class="material-icons">chevron_right</i>Echantillon n°1
-
-                                <button style="border-radius: 20px;" class="btn red waves-effect waves-light">
-                                    <i class="material-icons right">home</i>
-                                </button>
-
-
-                                <button style="border-radius: 20px; margin-left: 10px !important;"
-                                    class="btn red waves-effect waves-light">
-                                    <i class="material-icons right">history</i>
-                                </button>
-
-
-                                <!-- <span class="new badge red" data-badge-caption="Prolonger"></span>
-                                <span class="new badge red" data-badge-caption="Rendre"></span> -->
-                            </div>
-                            <div class="collapsible-body"><span>coucou jules</span></div>
-                        </li>
-                        <li>
-                            <div class="collapsible-header"><i class="material-icons">chevron_right</i>Echantillon
-                                n°2
-
-                                <button style="border-radius: 20px;" class="btn red waves-effect waves-light">
-                                    <i class="material-icons right">home</i>
-                                </button>
-
-
-                                <button style="border-radius: 20px; margin-left: 10px !important;"
-                                    class="btn red waves-effect waves-light">
-                                    <i class="material-icons right">history</i>
-                                </button>
-
-                            </div>
-                            <div class="collapsible-body"><span>coucou thomas</span></div>
-                        </li>
-                    </ul>
-
-                </form>
-
-                </form>
-            </div>
-        </div>
-    </div>
-
 
     <div id="phoneAppDiv"></div>
 
