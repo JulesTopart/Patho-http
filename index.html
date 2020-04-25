@@ -14,6 +14,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
 
 </head>
 
@@ -59,25 +60,18 @@
                 <div class="col s12">
                     <div class="row">
                         <div class="input-field col s12">
-                            <!-- <div class="chips chips-autocomplete"></div> -->
 
-                            <form autocomplete="off" action="/action_page.php">
-                                <div class="autocomplete">
-                                    <input id="searchBar" type="text" name="myCountry" placeholder="Rechercher...">
-                                </div>
+                            <div class="autocomplete">
+                                <input id="searchBar" type="text" placeholder="Rechercher...">
 
-                                <button id="buttonSearchTag" class="btn red waves-effect waves-light" type="submit"
-                                    name="action">Rechercher
+                                <button id="buttonSearchTag" class="btn red waves-effect waves-light" type="button"
+                                    onclick="app.searchBar.getRequest()">Rechercher
                                     <i class="material-icons right">search</i>
                                 </button>
-                            </form>
-
-
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
         </form>
 
     </div>
@@ -104,43 +98,30 @@
                 recherche</a>
         </li>
         <li>
-            <a class="waves-effect waves-light modal-trigger" href="#modal1"><i
+            <a class="waves-effect waves-light modal-trigger" href="#signUP"><i
                     class="material-icons">group_add</i>Créer un compte</a>
         </li>
     </ul>
 
     <!-- Modal Structure : This is used to create User account -->
-    <div id="modal1" class="modal modal-fixed-footer">
+    <div id="signUP" class="modal modal-fixed-footer">
         <div class="modal-content">
 
             <div class="row">
                 <form class="col s12">
                     <div class="row">
                         <div id="firstStepCreateAccount">
-                            <div class="input-field col s2 offset-s1 ">
-                                <div class="circleProfile">
-                                    <!-- User Profile Image -->
-                                    <img class="profile-pic" src="images/cameraAddUser.png">
-                                </div>
-
-                                <div class="p-image">
-                                    <i class="small material-icons upload-button">add_a_photo</i>
-                                    <input class="file-upload" type="file" accept="image/*" />
-                                </div>
-
+                            <div class="input-field col s12 center">
+                                <h4>Demande de création de compte</h4>
                             </div>
 
-                            <div class="input-field col s3 offset-s8">
-                                <i class="medium material-icons">account_circle</i>
-                            </div>
-
-                            <div class="input-field col s6 offset-s6">
+                            <div class="input-field col s6 offset-s3">
                                 <input id="icon_prefix_firstName" type="text" class="validate">
                                 <label for="icon_prefix">Prénom</label>
                                 <span class="helper-text" data-error="incorrect" data-success="correct"></span>
                             </div>
 
-                            <div class="input-field col s6 offset-s6">
+                            <div class="input-field col s6 offset-s3">
                                 <input id="icon_prefix_lastName" type="text" class="validate">
                                 <label for="icon_prefix">Nom</label>
                                 <span class="helper-text" data-error="incorrect" data-success="correct"></span>
@@ -156,20 +137,40 @@
                                     </div>
                                 </div>
                             </form>
+
+                            <form action="#">
+                                <p>
+                                    <label>
+                                        <input name="group1" type="radio" checked />
+                                        <span>Utilisateur</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input name="group1" type="radio" />
+                                        <span>Administrateur</span>
+                                    </label>
+                                </p>
+                            </form>
                         </div>
 
 
                         <div id="secondStepCreateAccount" class="hide">
+                            <div class="input-field col s12 center">
+                                <h4>Demande de création de compte</h4>
+                            </div>
 
                             <!-- TODO faire un password strengh meter -->
                             <div class="input-field col s6 offset-s3">
                                 <input id="pwd" type="password" required minlength="6" class="validate">
                                 <label for="pwd">Mot de passe</label>
+                                <span class="helper-text" data-error="+6 caractères" data-success="correct"></span>
                             </div>
 
                             <div class="input-field col s6 offset-s3">
                                 <input id="pwdCheck" type="password" required minlength="6" class="validate">
                                 <label for="pwdCheck">Entrer à nouveau votre mot de passe</label>
+                                <span class="helper-text" data-error="+6 caractères" data-success="correct"></span>
                             </div>
 
                             <div class="input-field col s6 offset-s3">
@@ -184,7 +185,8 @@
             </div>
         </div>
         <div class="modal-footer">
-            <a id="createAccountValidation" href="#" class="waves-effect waves-red btn-flat">Suivant</a>
+            <a id="createAccountBack" class="waves-effect waves-red btn-flat">Retour</a>
+            <a id="createAccountValidation" class="waves-effect waves-red btn-flat">Suivant</a>
         </div>
     </div>
 
@@ -214,7 +216,7 @@
 
 
                             <div class="input-field col s6 offset-s3 center">
-                                <u><a style="color: black;" href="#modal1">Faire une demande de création de
+                                <u><a id="fillSignUp" style="color: black;">Faire une demande de création de
                                         compte</a></u>
                             </div>
                         </div>
@@ -243,6 +245,9 @@
     </div>
 
     <div id="phoneAppDiv"></div>
+
+
+    <ul id="resultHandler" class="collapsible" style="display: none;"></ul>
 
 </body>
 
